@@ -3,6 +3,7 @@ import { sha256 } from '@oslojs/crypto/sha2';
 import { encodeBase64url, encodeHexLowerCase } from '@oslojs/encoding';
 import { db } from '$lib/server/db';
 import * as table from '$lib/server/db/schema';
+import projectConfig from '$lib/project.config';
 
 const DAY_IN_MS = 1000 * 60 * 60 * 24;
 
@@ -35,7 +36,14 @@ export async function validateSessionToken(token) {
 	const [result] = await db
 		.select({
 			// Adjust user table here to tweak returned data
-			user: { id: table.user.id, username: table.user.username },
+			user: { 
+				id: table.user.id, 
+				username: table.user.username, 
+				name: table.user.name, 
+				email: table.user.email, 
+				projectURL: table.user.projectURL, 
+				groupID: table.user.groupID 
+			},
 			session: table.session
 		})
 		.from(table.session)

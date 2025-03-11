@@ -18,7 +18,6 @@ export const actions = {
 		const formData = await event.request.formData();
 		const username = formData.get('username');
 		const password = formData.get('password');
-
 		if (!validateUsername(username)) {
 			return fail(400, { message: 'Invalid username (min 3, max 31 characters, alphanumeric only)' });
 		}
@@ -56,7 +55,10 @@ export const actions = {
 		const formData = await event.request.formData();
 		const username = formData.get('username');
 		const password = formData.get('password');
-
+		const name = formData.get('name');
+		const email = formData.get('email');
+		const projectURL = formData.get('projectURL');
+		const groupID = formData.get('groupID');
 		if (!validateUsername(username)) {
 			return fail(400, { message: 'Invalid username' });
 		}
@@ -74,7 +76,7 @@ export const actions = {
 		});
 
 		try {
-			await db.insert(table.user).values({ id: userId, username, passwordHash });
+			await db.insert(table.user).values({ id: userId, username, name, passwordHash, email, projectURL, groupID });
 
 			const sessionToken = auth.generateSessionToken();
 			const session = await auth.createSession(sessionToken, userId);

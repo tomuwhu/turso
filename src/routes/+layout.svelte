@@ -9,7 +9,7 @@
     user = data.user
     v = $page.url.pathname
     if (v == "/") active = 0
-    if (v == "/tools") active = 1
+    if (v == "/portfolios") active = 1
     if (v == "/demo") active = 2
     if (v == "/demo/lucia") active = 10
     if (v == "/demo/lucia/login") active = 10

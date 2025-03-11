@@ -16,7 +16,9 @@ const handleAuth = async ({ event, resolve }) => {
 	}
 
 	event.locals.user = user;
-	//event.locals.user.groupname = projectConfig?.groups?.find(group => group?.id == user?.groupID)?.name;
+	if (user) {
+		event.locals.user.groupname = projectConfig.groups.find(group => group.id == user?.groupID)?.name;
+	}
 	event.locals.session = session;
 	return resolve(event);
 };

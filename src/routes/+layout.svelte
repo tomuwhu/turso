@@ -25,7 +25,7 @@
 </script>
 <div class="ui pointing menu">
 {#each menu as item}
-    {#if !item.inner}
+    {#if !item.inner || user}
     <a class="item {active === menu.indexOf(item) ? 'active' : ''}"
       onclick={() => {active = menu.indexOf(item)}} href={item.link}>
       {item.name}

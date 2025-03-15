@@ -7,10 +7,10 @@
   let user = $state(data.user)
   const menu = [
     {name: "Home", link: "/"},
-    {name: "Regisztrált portfóliók listája", link: "/portfolios"},
-    {name: "Tematika", link: "/tematika"},
-    {name: "Tananyag", link: "/sveltetut/sveltekit_video"},
-    {name: "Front-end Demók", link: "/demo"},
+    {name: "Regisztrált portfóliók listája", link: "/portfolios", inner: true},
+    {name: "Tematika", link: "/tematika", inner: true},
+    {name: "Tananyag", link: "/sveltetut/sveltekit_video", inner: true},
+    {name: "Front-end Demók", link: "/demo", inner: true},
   ]
   const refresh = () => {
     user = data.user
@@ -25,24 +25,20 @@
 </script>
 <div class="ui pointing menu">
 {#each menu as item}
+    {#if !item.inner}
     <a class="item {active === menu.indexOf(item) ? 'active' : ''}"
       onclick={() => {active = menu.indexOf(item)}} href={item.link}>
       {item.name}
     </a>
+    {/if}
 {/each}
+<div class="right menu">
   <a class="item {active === 10 ? 'active' : ''}"
     onclick={() => {active = 10}} 
     href="/demo/lucia">
   {user ? `${user.name} profil` : "Login/Regisztráció"}
   </a>
-  <div class="right menu">
-    <div class="item">
-      <div class="ui transparent icon input">
-        <input type="text" placeholder="Search...">
-        <i class="search link icon"></i>
-      </div>
-    </div>
-  </div>
+</div>
 </div>
 
 {@render children()}
